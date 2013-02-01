@@ -1,0 +1,76 @@
+"我的firefox插件vimperator配置文件
+"建立的方法有两种
+"第一种是先用 :set 命令对各项设置进行设定
+"然后运行 :mkv 命令来自动生成配置文件
+"第二种是自己建立
+"Ubuntu下在~/.vimperatorrc
+"Windows下在C:\Users\name\_vimperatorrc
+
+
+"显示菜单栏，m菜单栏，T工具栏
+set go+=mT
+
+
+"翻页快捷键 [[ ]]
+"这里涉及中文，要注意编码格式
+"set nextpattern+=^下一页$
+"set previouspattern+=^上一页$
+set nextpattern=\s*下一页|下一张|下页\s*,\bnext\b,^>$,^>>$,\bmore\b
+set previouspattern=\s*上一页|上一张|上页\s*,\bprev|previous\b,^<$,^<<$
+
+
+"键映射
+"j->3j的映射用map不行，要用noremap，no remap
+"noremap不会对映射之后的键再映射，只要类似的情况都不能用map，要用noremap
+"map j 3j
+"map k 3k
+noremap j 3j
+noremap k 3k
+
+"下上翻半页
+map J <C-d>
+map K <C-u>
+
+"让某些快捷键失效，这些键不习惯而且用的少
+map A <Nop>
+map a <Nop>
+map <C-o> <Nop>
+map <C-i> <Nop>
+
+"后退前进
+noremap H <C-o>
+noremap L <C-i>
+noremap c <C-o>
+noremap v <C-i>
+
+"前后标签
+map I gT
+map O gt
+map gb gT
+noremap a gT
+noremap s gt
+
+"在新窗口打开主页(当前窗口打开主页是gh)
+map gy gH
+
+
+"设置Ctrl+c和Ctrl+v等
+
+"一般模式下直接Ctrl+c，Ctrl+a
+noremap <C-s> <C-c>
+noremap <C-c> <C-v><C-c>
+noremap <C-a> <C-v><C-a>
+
+"c模式下可以直接cvx
+"caret模式，网页中出现一个光标
+cnoremap <C-c> <C-v><C-c>
+cnoremap <C-v> <C-v><C-v>
+cnoremap <C-x> <C-v><C-x>
+
+"i模式(文本编辑)，可以直接acvxz，y是重做
+inoremap <C-a> <C-v><C-a>
+inoremap <C-c> <C-v><C-c>
+inoremap <C-v> <C-v><C-v>
+inoremap <C-x> <C-v><C-x>
+inoremap <C-z> <C-v><C-z>
+inoremap <C-y> <C-v><C-y> 

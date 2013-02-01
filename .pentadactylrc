@@ -1,0 +1,153 @@
+"1.0b3 (created: 2010/11/06 12:31:35)
+
+set runtimepath='/home/xiaowu/.pentadactyl'
+set vb
+
+set go=
+
+noremap = +
+
+" vim: set ft=pentadactyl:
+
+"added by wxw on 2010/11/06
+
+"Next Page and Previous Page超级的下一页,基本上是够用了.快捷键是[[和]]
+set pps=
+    set nextpattern=\s*下一页|下一张|下一篇|下页|后页\s*,^\bnext\b,\\bnext\\b,^>$,^(>>|»)$,^(>|»),(>|»)$,\\bmore\\b
+    set previouspattern=\s*上一页|上一张|上一篇|上页|前页\s*,^\bprev|previous\b,\\bprev|previous\\b,^<$,^(<<|«)$,^(<|«),(<|«)$
+" }
+
+":set previouspattern=\s*上一页|上一张|上一篇|上页|前页\s*,\bprev|previous\b,^<$,^(<<|«)$,^(<|«),(<|«)$
+":set nextpattern=\s*下一页|下一頁|下一张|下一篇|下页|后页\s*,\bnext,^>$,^(>>|»)$,^(>|»),(>|»)$,\b.more\b
+
+:se editor=/usr/bin/gvim
+
+"reboot firefox
+noremap ZZ :res<CR>
+
+" recover ctrl+b to manage tags
+    noremap <C-b> <C-v><C-b>
+    inoremap <C-b> <C-v><C-b>
+    cnoremap <C-b> <C-v><C-b>
+"stop
+    map s :stop<CR>
+
+
+    nmap <C-,>  :preferences<CR>
+    nmap <leader>add :addons<CR>
+
+"=================================================
+" PASS KEYS
+"=================================================
+
+se pk='https://mail\.google\.com/':c/kjpouexs!ra#IU[]zqy?<gi><ga><gs><gc><gd><gl><gt><*a><*n><*r><*u><*s><*t><yo>
+se pk+='https://www\.google\.com/reader/':jkJKpNPXOsltSDvocCaATrfU12/=-?<Shift><Space><S-Space><gh><ga><gs><gS><gu><gt><gT><gf><gF><gd><gp><ge><gc>
+se pk+='https://twitter\.com/':frt?jk/.<gh><gr><gp><gf><gm><gu><Space>
+
+"在特定网站中禁用strictfocus
+autocmd LocationChange 'about:config|https://mail\.google\.com/|https://www\.google\.com/reader/|https://twitter\.com/' :se nosf
+autocmd LocationChange !'about:config|https://mail\.google\.com/|https://www\.google\.com/reader/|https://twitter\.com/' :se sf
+
+"Toggle the toolbar
+map <C-Up> :se go+=T<cr>
+map <C-Down> :se go-=T<cr>
+
+se hi=120
+
+
+js <<EOM
+    options.copy_templates = [
+        { label: 'titleAndURL',    value: '%TITLE%\n%URL%', map: ',Y'},
+        { label: 'title',          value: '%TITLE%', map: ',y'},
+        { label: 'anchor',         value: '<a href="%URL%">%TITLE%</a>' },
+        { label: 'selanchor',      value: '<a href="%URL%" title="%TITLE%">%SEL%</a>' },
+        { label: 'htmlblockquote', value: '<blockquote cite="%URL%" title="%TITLE%">%HTMLSEL%</blockquote>' }
+    ];
+EOM
+
+"highlight StatusLine color:#0B3978; background:#F5F5F5 !important;
+style -name=status-bar chrome://* #status-bar {font-family: verdana !important; font-weight: normal !important;} #dactyl-statusline-field-container {padding-right: 5px !important;}
+
+    hi StatusLine background:#f0f0f0 !important;
+    hi StatusLineBroken background:#f0f0f0 !important;
+    hi StatusLineSecure background:#f0f0f0 !important;
+    hi StatusLineExtended background:#f0f0f0 !important;
+    hi CmdLine padding: 1px !important;
+    hi Normal color: black !important; background: white !important; font-weight: normal !important;font-family: verdana !important;
+    hi CompTitle color: #6DA335; background: #f0f0f0; font-weight: bold;
+    hi GradientLeft background-color: #6DA335;
+    hi Preview color: #4B9CEB;
+    hi ErrorMsg color: red !important; background-color: #f0f0f0 !important;
+    hi Hint font-family: monospace; font-size: 9px; text-transform: uppercase; color: white; background-color: #1E90FF; padding:1px;
+    hi HintElem background-color: transparent;
+
+style -name commandline-ime chrome://* #dactyl-commandline-command input {ime-mode: inactive;}
+style -name tabnum chrome://* #TabsToolbar { counter-reset:tabn; } #TabsToolbar tab::after { counter-increment:tabn; content:counter(tabn); font:bold 0.84em monospace; } #TabsToolbar tab:not([pinned])::after { display:block; padding-bottom:0.4em; }
+
+
+"命令行下拉菜单最多显示的条目数
+set maxitems=6
+"Look up the word you selected in dict.cn在dict.cn中查找所选词的英语
+command! dict -nargs=* tabopen http://dict.cn/<args>
+map w :dict 
+map <silent> W :exe ":dict "+content.getSelection()<CR>
+
+"js <<EOF
+"// Toggle Tool bar
+"dactyl.globalVariables['sx_gopt'] = 'T'
+"toggle_bar = function () {
+"toggle_status = dactyl.globalVariables['sx_gopt'];
+"dactyl.globalVariables['sx_gopt'] = (toggle_status == ''? 'T': '');
+"dactyl.execute('set guioptions=' + toggle_status);
+"}
+"// Wiki Selected Text
+"wiki_selected_text = function () {
+"str = buffer.getCurrentWord()
+"dactyl.execute('tabopen wikipedia ' + str);
+"}
+"EOF
+" map to js functions F2来显示隐藏工具栏;用<C-W>来在wiki中查看词条.
+
+"map <silent> <F2> :js toggle_bar() <CR>
+"map <C-w> :js wiki_selected_text() <CR>
+
+
+map J <C-d>
+map K <C-u>
+
+
+noremap <C-c> <C-v><C-c>
+noremap <C-a> <C-v><C-a>
+cnoremap <C-c> <C-v><C-c>
+cnoremap <C-v> <C-v><C-v>
+cnoremap <C-x> <C-v><C-x>
+inoremap <C-a> <C-v><C-a>
+inoremap <C-c> <C-v><C-c>
+inoremap <C-v> <C-v><C-v>
+inoremap <C-x> <C-v><C-x>
+inoremap <C-z> <C-v><C-z>
+inoremap <C-y> <C-v><C-y>
+
+noremap y Y
+noremap Y y
+
+noremap h gT
+noremap l gt
+
+noremap j 2j
+noremap k 2k
+noremap zq :preferences
+noremap za :addons
+noremap zd :downloads
+noremap zh :history
+noremap zr :res
+
+
+noremap H h
+noremap L l
+map < <C-6>
+noremap > g$
+noremap , <C-o>
+noremap . <C-i>
+map U :ju<CR>
+map <C-.> :tabm<CR>

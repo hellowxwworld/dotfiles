@@ -1,0 +1,55 @@
+# Read File Into Vector
+snippet readfile
+	std::vector<char> v;
+	if (FILE *${2:fp} = fopen(${1:"filename"}, "r"))
+	{
+		char buf[1024];
+		while (size_t len = fread(buf, 1, sizeof(buf), $2))
+			v.insert(v.end(), buf, buf + len);
+		fclose($2);
+	}${3}
+# std::map
+snippet map
+	std::map<${1:key}, ${2:value}> map${3};
+# std::vector
+snippet vector
+	std::vector<${1:char}> v${2};
+# Namespace
+snippet ns
+	namespace ${1:`Filename('', 'my')`}
+	{
+		${2}
+	} // end of namespace $1 definidation
+# Class
+snippet cl
+	class ${1:`Filename('$1_t', 'name')`}
+	{
+	public:
+		${2:// comment}
+	private:
+		${3:// comment}
+	}; // end of class $1 definidation
+# wxw added
+snippet us
+	using namespace ${1:std};
+	${2}
+
+snippet incc
+	#include <${1:iostream}>
+	${2}
+
+snippet tm
+	template <class ${1:Type}>
+	${2}
+snippet defex
+	#ifdef __cplusplus
+	extern "C"
+	{
+	#endif
+
+	${1}
+
+	#ifdef __cplusplus
+	}
+	#endif${2}
+	
