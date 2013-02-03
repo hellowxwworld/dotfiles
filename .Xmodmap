@@ -1,0 +1,13 @@
+remove Lock = Caps_Lock
+keysym Escape = Caps_Lock
+keysym Caps_Lock = Escape
+add Lock = Caps_Lock
+
+clear mod1
+clear mod4
+keycode 133 = Alt_L NoSymbol Alt_L NoSymbol Alt_L
+keycode 134 = Alt_R NoSymbol Alt_R NoSymbol Alt_R
+keycode 64 = Super_L NoSymbol Super_L NoSymbol Super_L
+keycode 108 = Super_R NoSymbol Super_R NoSymbol Super_R
+add mod1 = Alt_L Alt_R
+add mod4 = Super_L Super_R
