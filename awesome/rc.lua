@@ -101,6 +101,25 @@ function rel_movetag(n) --{{{
         end
     end
 end --}}}
+
+ -- Get a relative tag number
+ function getrelativetag(delta, screen)
+     return (awful.tag.getidx(selected) + delta - 1) % #tags[screen] + 1
+ end
+ 
+ -- Move the focused window to the next tag
+ function movetonexttag(delta)
+     local stags = {}
+     if client.focus then
+         stags = tags[client.focus.screen]
+         awful.client.movetotag(stags[getrelativetag(delta, 1)])
+     else
+         stags = tags[1]
+     end
+ 
+     awful.tag.viewonly(stags[getrelativetag(delta, 1)])
+ end
+
 function dbg(vars) --{{{
     local text = ""
     for i=1, #vars do text = text .. tostring(vars[i]) .. " | " end
@@ -861,10 +880,16 @@ globalkeys = awful.util.table.join( --{{{
         awful.tag.viewprev, "Prev Tag"       ),
     awful.key({ modkey,           }, "l", 
         awful.tag.viewnext, "Next Tag"       ),
-    awful.key({ modkey, "Shift"   }, "h",       
-        function () rel_movetag(-1) end, "Move to Prev Tag"),
-    awful.key({ modkey, "Shift"   }, "l",       
-        function () rel_movetag(1)  end, "Move to Next Tag"),
+
+    --awful.key({ modkey, "Shift"   }, "h",       
+        --function () rel_movetag(-1) end, "Move to Prev Tag"),
+    --awful.key({ modkey, "Shift"   }, "l",       
+        --function () rel_movetag(1)  end, "Move to Next Tag"),
+
+     --awful.key({ "modkey", "Shift" }, "h",  function () awful.tag.viewprev() end),
+     --awful.key({ "Mod4" }, "Right",  function () awful.tag.viewnext() end),
+     awful.key({ modkey, "Shift" }, "h",  function () movetonexttag(-1) end),
+     awful.key({ modkey, "Shift" }, "l", function () movetonexttag( 1) end),
 
 awful.key({ modkey, "Shift"   }, "o",
           function (c)
@@ -876,10 +901,12 @@ awful.key({ modkey, "Shift"   }, "o",
         awful.tag.viewprev, "Prev Tag"      ),
     awful.key({ modkey,           }, "Right", 
         awful.tag.viewnext, "Next Tag"       ),
-    awful.key({ modkey, "Shift"   }, "Left",  
-        function () rel_movetag(-1) end, "Move to Prev Tag"),
-    awful.key({ modkey, "Shift"   }, "Right",
-        function () rel_movetag(1)  end, "Move to Next Tag"),
+    --awful.key({ modkey, "Shift"   }, "Left",  
+        --function () rel_movetag(-1) end, "Move to Prev Tag"),
+    --awful.key({ modkey, "Shift"   }, "Right",
+        --function () rel_movetag(1)  end, "Move to Next Tag"),
+     awful.key({ modkey, "Shift" }, "Left",  function () movetonexttag(-1) end),
+     awful.key({ modkey, "Shift" }, "Right", function () movetonexttag( 1) end),
 
     keydoc.group("Moving Between Clients"),
 --    awful.key({ modkey,           }, "Tab",
