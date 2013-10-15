@@ -1,10 +1,19 @@
 have_header: checking for ruby.h... -------------------- yes
 
-"gcc -E -I. -I/usr/lib/ruby/1.8/x86_64-linux -I.    -fno-strict-aliasing -g -g -O2  -fPIC    conftest.c -o conftest.i"
-/usr/lib/ruby/1.8/mkmf.rb:266: warning: Insecure world writable dir /usr/local/arm/arm-2009q3 in PATH, mode 040777
+"gcc -o conftest -I/home/w/.rvm/rubies/ruby-1.9.3-p327/include/ruby-1.9.1/x86_64-linux -I/home/w/.rvm/rubies/ruby-1.9.3-p327/include/ruby-1.9.1/ruby/backward -I/home/w/.rvm/rubies/ruby-1.9.3-p327/include/ruby-1.9.1 -I.    -I/home/w/.rvm/rubies/ruby-1.9.3-p327/include  -O3 -ggdb -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration  -fPIC conftest.c  -L. -L/home/w/.rvm/rubies/ruby-1.9.3-p327/lib -Wl,-R/home/w/.rvm/rubies/ruby-1.9.3-p327/lib -L/home/w/.rvm/rubies/ruby-1.9.3-p327/lib -Wl,-R/home/w/.rvm/rubies/ruby-1.9.3-p327/lib -L.  -rdynamic -Wl,-export-dynamic -L/home/w/.rvm/rubies/ruby-1.9.3-p327/lib  -Wl,-R/home/w/.rvm/rubies/ruby-1.9.3-p327/lib      '-Wl,-rpath,/../lib' -Wl,-R -Wl,/home/w/.rvm/rubies/ruby-1.9.3-p327/lib -L/home/w/.rvm/rubies/ruby-1.9.3-p327/lib -lruby  -lpthread -lrt -ldl -lcrypt -lm   -lc"
 checked program was:
 /* begin */
-1: #include <ruby.h>
+1: #include "ruby.h"
+2: 
+3: int main() {return 0;}
+/* end */
+
+"gcc -E -I/home/w/.rvm/rubies/ruby-1.9.3-p327/include/ruby-1.9.1/x86_64-linux -I/home/w/.rvm/rubies/ruby-1.9.3-p327/include/ruby-1.9.1/ruby/backward -I/home/w/.rvm/rubies/ruby-1.9.3-p327/include/ruby-1.9.1 -I.    -I/home/w/.rvm/rubies/ruby-1.9.3-p327/include  -O3 -ggdb -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration  -fPIC  conftest.c -o conftest.i"
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: #include <ruby.h>
 /* end */
 
 --------------------

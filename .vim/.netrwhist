@@ -1,4 +1,8 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =2
-let g:netrw_dirhist_1='/home/w/tmp'
-let g:netrw_dirhist_2='/home/w/.config'
+let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_1='/work/m65/linux-3.4.5-m65/arch/arm/mach-exynos'
+let g:netrw_dirhist_2='/meizu/JellyBean-4.2.1/trunk/device/meizu/mx3/libtfa98xx'
+let g:netrw_dirhist_3='/work/m65/linux-3.4.5-m65/sound/soc/samsung'
+let g:netrw_dirhist_4='/meizu/JellyBean-4.2.1/trunk/out/target/product/mx3/root/sbin'
+let g:netrw_dirhist_5='/home/w/.vim/autoload'
+let g:netrw_dirhist_6='/work/m65/linux-3.4.5-m65/sound'

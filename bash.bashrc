@@ -62,8 +62,6 @@ if [ -x /usr/lib/command-not-found -o -x /usr/share/command-not-found ]; then
 	}
 fi
 
-
-
 # some more ls aliases
 alias ll='ls -alF --color=auto'
 alias la='ls -A --color=auto'
@@ -72,30 +70,23 @@ alias gvim='UBUNTU_MENOPROXY= gvim'
 alias g='UBUNTU_MENOPROXY= gvim'
 alias ggit='UBUNTU_MENOPROXY gvim ~/tmp/gitcommit.log'
 alias gvimdiff='gvimdiff -c "call MaximizeWindow()"'
-
-
 alias rm='rm -i'
 alias mv='mv -i'
 
-#if [ -d /opt/crosstool-4.1.1 ]; then
-#	PATH=/opt/crosstool-4.1.1/gcc-4.1.1-glibc-2.3.2/arm-linux/bin:"${PATH}"
-#fi
-
-#if [ -d /work/cross_compile/arm-2010q1/bin ]; then
-#	PATH=/work/cross_compile/arm-2010q1/bin:"${PATH}"
-#fi
-
-export PATH=${PATH}:/opt/android-sdk-linux/tools
-export PATH=${PATH}:/opt/android-sdk-linux/platform-tools
-
 export JAVA_HOME=/opt/jdk1.6.0_32
 export JRE_HOME=/opt/jdk1.6.0_32/jre
-export CLASSPATH=$CLASSPATH:$JAVA_HOME/lib:$JAVA_HOME/jre/lib
+export CLASSPATH=$CLASSPATH:$JAVA_HOME/lib:$JAVA_HOME/jre/lib:/home/w/.vim/autoload/
 export PATH=$JAVA_HOME/bin:$JAVA_HOME/jre/bin:$PATH:$HOME/bin
 
+export PATH=${PATH}:/opt/android-studio/bin
+export PATH=${PATH}:/opt/android-sdk-linux/tools
+export PATH=${PATH}:/opt/android-sdk-linux/platform-tools
+export PATH=${PATH}:/meizu/JellyBean-4.2.1/trunk/prebuilts/gcc/linux-x86/arm/arm-eabi-4.6/bin
+export SVN_EDITOR=/usr/bin/vim
+
+export PATH=${PATH}:/opt/adt-bundle-linux-x86_64-20130729/eclipse
+
 #call Maximize_Window() to maximize gvim window when started
-
-
 #Set the screen title
 case $TERM in
     screen*)

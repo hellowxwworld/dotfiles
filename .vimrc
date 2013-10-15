@@ -90,6 +90,7 @@ nn <M-8> 8gt
 nn <M-9> 9gt
 nn <M-0> :tablast<CR>
 
+
 ino <M-1> <C-o>1gt
 ino <M-2> <C-o>2gt
 ino <M-3> <C-o>3gt
@@ -114,9 +115,7 @@ nnoremap <silent><F6> : A<cr>
 nnoremap <silent>,g :Grep<cr>
 "map <leader>g :Grep<cr>
 
-
 """"""""""""""""""""""""""""""
-"
 " Uncomment the following to have Vim load indentation rules and plugins
 " according to the detected filetype.
 """"""""""""""""""""""""""""""
@@ -372,60 +371,63 @@ let g:vimwiki_list=[{'path':'~/note/vimwiki/',
 \ 'path_html':'~/note/vimwiki/html/',
 \ 'html_header':'~/note/vimwiki/template/header.tpl',}]
 
+" use JumpInCode_Plus.vim instead
 """"""""""""""""""""F12 to call Do_CsTag()""""""""""""""""""""
 "autocmd BufEnter * cd %:p:h "the same with autochdir
 """"""""""""""""""""F12 to call Do_CsTag()""""""""""""""""""""
-map <F12> :call Do_CsTag()<cr>
-function! Do_CsTag()
-    let dir = getcwd()
-
-    "先删除已有的tags和cscope文件，如果存在且无法删除，则报错。
-    if ( DeleteFile(dir, "tags") )
-        return
-    endif
-    if ( DeleteFile(dir, "cscope.files") )
-        return
-    endif
-    if ( DeleteFile(dir, "cscope.out") )
-        return
-    endif
-    if ( DeleteFile(dir, "cscope.in.out") )
-        return
-    endif
-    if ( DeleteFile(dir, "cscope.po.out") )
-        return
-    endif
-
-    if(executable('ctags'))
-		"silent! execute "!ctags -I __THROW --file-scope=yes --langmap=c:+.h --languages=c,c++ --links=yes --c-kinds=+p --fields=+lS -R -f ."
-		silent! execute "!ctags -R --sort=yes --c++-kinds=+p --fields=+iaS --extra=+q ."
-		silent! execute "set tags=./tags;"
-    endif
-
-   if(executable('cscope') && has("cscope") )
-	   silent! execute "!find . -name '*.[ch]' -o -name '*.cpp' > cscope.files"
-	   silent! execute "!cscope -b"
-	   execute "normal :"
-	   if filereadable("cscope.out")
-		   execute "cs add cscope.out"
-	   endif
-   endif
-    " 刷新屏幕
-    execute "redr!"
-endfunction
-
-function! DeleteFile(dir, filename)
-    if filereadable(a:filename)
-        let ret = delete("./".a:filename)
-        if (ret != 0)
-            echohl WarningMsg | echo "Failed to delete ".a:filename | echohl None
-            return 1
-        else
-            return 0
-        endif
-    endif
-    return 0
-endfunction
+" map <F12> :call Do_CsTag()<cr>
+" function! Do_CsTag()
+"     let dir = getcwd()
+" 
+"     "先删除已有的tags和cscope文件，如果存在且无法删除，则报错。
+"     if ( DeleteFile(dir, "tags") )
+"         return
+"     endif
+"     if ( DeleteFile(dir, "cscope.files") )
+"         return
+"     endif
+"     if ( DeleteFile(dir, "cscope.out") )
+"         return
+"     endif
+"     if ( DeleteFile(dir, "cscope.in.out") )
+"         return
+"     endif
+"     if ( DeleteFile(dir, "cscope.po.out") )
+"         return
+"     endif
+" 
+" 	if(executable('ctags'))
+" 		"silent! execute "!ctags -I __THROW --file-scope=yes --langmap=c:+.h --languages=c,c++ --links=yes --c-kinds=+p --fields=+lS -R -f ."
+" 		silent! execute "!ctags -R --sort=yes --c++-kinds=+p --fields=+iaS --extra=+q ."
+" 		if filereadable("tags")
+" 			execute "set tags=tags;"
+" 		endif
+" 	endif
+" 
+"    if(executable('cscope') && has("cscope") )
+" 	   silent! execute "!find . -name '*.[ch]' -o -name '*.cpp' > cscope.files"
+" 	   silent! execute "!cscope -bq"
+" 	   execute "normal :"
+" 	   if filereadable("cscope.out")
+" 		   execute "cs add cscope.out"
+" 	   endif
+"    endif
+"     " 刷新屏幕
+"     execute "redr!"
+" endfunction
+" 
+" function! DeleteFile(dir, filename)
+"     if filereadable(a:filename)
+"         let ret = delete("./".a:filename)
+"         if (ret != 0)
+"             echohl WarningMsg | echo "Failed to delete ".a:filename | echohl None
+"             return 1
+"         else
+"             return 0
+"         endif
+"     endif
+"     return 0
+" endfunction
 
 "-------------------------------------------------------------------------------
 " Various settings
@@ -445,7 +447,7 @@ set guifont=XHei\ Mono\ 11.5
 set tabstop=4
 set cindent shiftwidth=4
 set autoindent shiftwidth=4
-"set number						" display the number of line
+set number						" display the number of line
 "map <leader>n :set number<cr>
 "set mouse=v                     " enable the use of the mouse
 set selection=exclusive
@@ -532,6 +534,8 @@ elseif "linux-3.0.39-rtm-mp-dev"==matchstr(getcwd(), "linux-3.0.39-rtm-mp-dev")
 	silent! execute "cd /work/m40/linux-3.0.39-rtm-mp-dev"
 elseif "linux-3.0.39-rtm-mp-dev"==matchstr(getcwd(), "linux-3.0.39-rtm-mp-dev")
 	silent! execute "cd /work/m40/linux-3.0.39-rtm-mp-dev"
+elseif "linux-3.4.5-m65"==matchstr(getcwd(), "linux-3.4.5-m65")
+	silent! execute "cd /work/m65/linux-3.4.5-m65"
 endif
 endfunction
 
@@ -542,11 +546,24 @@ map  <silent> <leader>cf :call PROJECT_DIR_FUNCTION()<CR>:CommandT<CR>
 "-------------------------------------------------------------------------------
 "winmanager setting
 "-------------------------------------------------------------------------------
-"
 "let g:winManagerWindowLayout='FileExplorer|TagList'
-let g:winManagerWindowLayout='FileExplorer'
-let g:winManagerWidth=30
-nmap wm :WMToggle<cr>
+"let g:winManagerWindowLayout='FileExplorer'
+"let g:winManagerWidth=30
+"nmap wm :WMToggle<cr>
+
+"-------------------------------------------------------------------------------
+"NERDTree setting
+"-------------------------------------------------------------------------------
+"NERDTree配置{{{
+	map wm :NERDTreeToggle<CR>
+	map <leader>wm :NERDTreeFind<CR>
+	let NERDTreeChDirMode=2 "选中root即设置为当前目录
+	"let NERDTreeQuitOnOpen=1 "打开文件时关闭树
+	let NERDTreeShowBookmarks=1 "显示书签
+	let NERDTreeMinimalUI=1 "不显示帮助面板
+	let NERDTreeDirArrows=1 "目录箭头 1 显示箭头 0传统+-|号
+"}}}
+
 "-------------------------------------------------------------------------------
 
 "taglist setting
@@ -561,7 +578,7 @@ let Tlist_Use_Left_Window = 1
 
 "set tags=~/.vim/tags/libc.tags
 "set tags+=~/.vim/tags/glib.tags
-set tags=./tags,./../tags,./../../tags,./../../../tags,./../../../../tags
+"set tags=./tags,./../tags,./../../tags,./../../../tags,./../../../../tags
 "set tags+=~/.vim/tags/sys.tags
 "set tags+=~/.vim/tags/susv2.tags
 
@@ -569,6 +586,14 @@ set tags=./tags,./../tags,./../../tags,./../../../tags,./../../../../tags
 "set tags+=/home/xiaowu/.vim/tags/sys.tags
 "set tags+=/home/xiaowu/.vim/tags/tags
 "!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q ."
+"
+set tags=OutDB/tags
+
+"if has("ctags") 
+	"if filereadable("OutDB/tags")
+		"set tags=OutDB/tags
+	"endif
+"endif
 
 au BufWritePost *.c,*.cpp,*.cxx,*.cc,*.h "!ctags -I __THROW --file-scope=yes --langmap=c:+.h --languages=c,c++ --links=yes --c-kinds=+p --fields=+lS -R -f ."
 
@@ -576,11 +601,11 @@ if has("cscope")
 	set csto=1
 	set cst
 	set nocsverb
-	if filereadable("cscope.out")
-		cs add cscope.out
+	if filereadable("OutDB/cscope.out")
+		cs add OutDB/cscope.out
 	endif
-	set cscopetag
-	set csverb
+	"set cscopetag
+	"set csverb
 	set cscopequickfix=s-,c-,d-,i-,t-,e-,g-,f-
 	nmap <leader>ss :cs find s <C-R>=expand("<cword>")<CR><CR>:copen<CR>
 	nmap <leader>sg :cs find g <C-R>=expand("<cword>")<CR><CR>
@@ -590,6 +615,8 @@ if has("cscope")
 	nmap <leader>se :cs find e <C-R>=expand("<cword>")<CR><CR>:copen<CR>
 	nmap <leader>sf :cs find f <C-R>=expand("<cfile>")<CR><CR>:copen<CR>
 	nmap <leader>si :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>:copen<CR>
+	"nmap <leader>sa :cstag <C-R>=expand("<cword>")<CR><CR>
+	"nmap <CR> :cs find g <C-R>=expand("<cword>")<CR><CR>
 
 	" s: 查找C语言符号，即查找函数名、宏、枚举值等出现的地方
 	" g: 查找函数、宏、枚举等定义的位置，类似ctags所提供的功能
@@ -810,3 +837,19 @@ function! ShowNumToggle()
   endif
 endfunction
 
+
+" for JAVA completion
+
+setlocal omnifunc=javacomplete#Complete
+
+autocmd Filetype java set omnifunc=javacomplete#Complete               "         “这一句是自动补全（好像是）
+autocmd Filetype java set completefunc=javacomplete#CompleteParamsInf  "”  这一句是参数提示，好像不太好用，
+
+
+inoremap <buffer> <C-X><C-U> <C-X><C-U><C-P>
+inoremap <buffer> <A-/> <C-X><C-U><C-P>
+inoremap <buffer> <C-S-Space> <C-X><C-U><C-P>
+
+autocmd Filetype java,javascript,jsp inoremap <buffer>  .  .<C-X><C-O><C-P>
+
+"时会触发<C-X><C-O><C-P> 

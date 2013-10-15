@@ -13,8 +13,8 @@ HISTCONTROL=ignoredups:ignorespace
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000000
-HISTFILESIZE=2000000
+HISTSIZE=10000000
+HISTFILESIZE=20000000
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -131,26 +131,18 @@ export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
 #}}}
 
-#export PATH=${PATH}:/maxwit/toolchain/arm/usr/bin
-#export PATH=${PATH}:/usr/local/arm/4.2.2-eabi/usr/bin
-#export PATH=${PATH}:/work/cross_compile/arm-2010q1/bin
-export PATH=${PATH}:/opt/android-sdk-linux/tools
-export PATH=${PATH}:/opt/android-sdk-linux/platforms-tools
 
-export JAVA_HOME=/opt/jdk1.6.0_32
-export JRE_HOME=/opt/jdk1.6.0_32/jre
-export CLASSPATH=$CLASSPATH:$JAVA_HOME/lib:$JAVA_HOME/jre/lib
-export PATH=$JAVA_HOME/bin:$JAVA_HOME/jre/bin:$PATH:$HOME/bin
+# done in /etc/profile.d/development.sh
+#export JAVA_HOME=/opt/jdk1.6.0_32
+#export JRE_HOME=/opt/jdk1.6.0_32/jre
+#export CLASSPATH=$CLASSPATH:$JAVA_HOME/lib:$JAVA_HOME/jre/lib
+#export PATH=$JAVA_HOME/bin:$JAVA_HOME/jre/bin:$PATH:$HOME/bin
 
-UBOOT_CROSS_COMPILE=/usr/local/arm/arm-2010q1/bin
-#UBOOT_CROSS_COMPILE=/usr/local/arm/gcc-linaro-arm-linux-gnueabihf-2012.05-20120523_linux/bin
-#export PATH=$UBOOT_CROSS_COMPILE:$PATH
-#UBOOT_CROSS_COMPILE=/meizu/JellyBean/trunk/prebuilt/linux-x86/toolchain/arm-eabi-4.4.3/bin
-#export PATH=$UBOOT_CROSS_COMPILE:$PATH
-#UBOOT_CROSS_COMPILE=/meizu/JellyBean/trunk/prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.7-4.6/bin
-export PATH=$UBOOT_CROSS_COMPILE:$PATH
-
-export SVN_EDITOR=/usr/bin/vim
+#export PATH=${PATH}:/opt/android-studio/bin
+#export PATH=${PATH}:/opt/android-studio/sdk/tools
+#export PATH=${PATH}:/opt/android-studio/sdk/platform-tools
+#export PATH=${PATH}:/meizu/JellyBean-4.2.1/trunk/prebuilts/gcc/linux-x86/arm/arm-eabi-4.6/bin
+#export SVN_EDITOR=/usr/bin/vim
 
 ##################################################
 # new bash cmd
@@ -190,6 +182,10 @@ function m40() {
 	cd /work/m40
 	pwd;
 }
+function m65() {
+	cd /work/m65
+	pwd;
+}
 function ics() {
 	cd /meizu/IceCreamSandwich/trunk
 	pwd;
@@ -200,15 +196,34 @@ function icsout() {
 	pwd;
 
 }
-function jl() {
-	cd /meizu/JellyBean/trunk
+function j() {
+	cd /work/JellyBean/trunk
 	pwd;
 
 }
-function jlout() {
-	cd /meizu/JellyBean/trunk/out/target/product/
+function jo() {
+	cd /work/JellyBean/trunk/out/target/product/
 	pwd;
 
+}
+function j1() {
+	cd /meizu/JellyBean-4.2.1/trunk
+	pwd;
+
+}
+function j1o() {
+	cd /meizu/JellyBean-4.2.1/trunk/out/target/product/
+	pwd;
+
+}
+function j6() {
+	cd /meizu/android_JB_TF4_MR1/trunk
+	pwd;
+
+}
+function j6o() {
+	cd /meizu/android_JB_TF4_MR1/trunk/out/target/product/
+	pwd;
 }
 function gin() {
 	cd /meizu/gin/trunk;
@@ -230,11 +245,15 @@ function z() {
 	sudo dnw arch/arm/boot/zImage;
 	pwd;
 }
+function zz() {
+	sudo dnw ./zImage;
+	pwd;
+}
 function re() {
 	sudo dnw recovery-uboot.img;
 	pwd;
 }
-function ram() {
+function r() {
 	sudo dnw ramdisk-uboot.img;
 	pwd;
 }
@@ -251,7 +270,7 @@ function sdiff() {
 }
 
 function mz() {
-	export PATH=/usr/local/arm/arm-2010q1/bin:$PATH
+	export PATH=/meizu/JellyBean-4.2.1/trunk/prebuilts/gcc/linux-x86/arm/arm-eabi-4.6/bin:${PATH}
 	make zImage -j9 CROSS_COMPILE=arm-linux-
 }
 
@@ -262,5 +281,5 @@ export QT_IM_MODULE=xim
 
 #export PS1="\e[1;32m\[\e[40m${debian_chroot:+($debian_chroot)}\u@$(tput setaf 5)w: $(tput setaf 4)\w\a$\] \e[m"
 
-source /home/w/.rvm/scripts/rvm
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+# source /home/w/.rvm/scripts/rvm
+# PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
