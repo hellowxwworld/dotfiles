@@ -1,0 +1,75 @@
+127.0.0.1	localhost
+127.0.1.1	w
+
+#Gmail
+203.208.46.146 mail.google.com
+203.208.46.146 chatenabled.mail.google.com #Gmail中Gtalk聊天服务
+#Google 搜索
+203.208.46.146 www.google.com
+
+#Google preview
+203.208.46.146 www.googlepreview.com
+
+#Google 翻译
+203.208.46.146 translate.google.com
+203.208.46.146 translate.googleapis.com
+
+#Google 搜索建议（IE9）
+203.208.46.146 clients5.google.com
+
+#Google Code
+203.208.46.146 code.google.com
+
+#Picasa 网络相册
+203.208.46.146 picasaweb.google.com
+203.208.46.146 lh0.ggpht.com
+203.208.46.146 lh1.ggpht.com
+203.208.46.146 lh2.ggpht.com
+203.208.46.146 lh3.ggpht.com
+203.208.46.146 lh4.ggpht.com
+203.208.46.146 lh5.ggpht.com
+203.208.46.146 lh6.ggpht.com
+203.208.46.146 lh7.ggpht.com
+203.208.46.146 lh8.ggpht.com
+203.208.46.146 lh8.ggpht.com
+203.208.46.146 lh9.ggpht.com
+203.208.46.146 lh6.google.com
+
+#Google 个人资料
+203.208.46.146 profiles.google.com
+203.208.46.146 browsersync.google.com
+
+#Google+
+203.208.46.146 talkgadget.google.com #Google+中的聊天服务
+203.208.46.146 ssl.gstatic.com
+203.208.46.146 images-pos-opensocial.googleusercontent.com
+203.208.46.146 images1-focus-opensocial.googleusercontent.com
+203.208.46.146 images2-focus-opensocial.googleusercontent.com
+203.208.46.146 images3-focus-opensocial.googleusercontent.com
+203.208.46.146 images4-focus-opensocial.googleusercontent.com
+203.208.46.146 images5-focus-opensocial.googleusercontent.com
+203.208.46.146 images6-focus-opensocial.googleusercontent.com
+203.208.46.146 plus.google.com
+
+#Download 下载
+203.208.46.146 dl.google.com
+203.208.46.146 dl-ssl.google.com
+
+#Groups
+203.208.46.146 groups.google.com
+
+#Google URL Shortener
+203.208.46.146 goo.gl
+
+#Google App Engine
+203.208.46.146 appengine.google.com
+
+#Android Developer
+74.125.113.121 developer.android.com
+
+# The following lines are desirable for IPv6 capable hosts
+::1     ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
